@@ -1,3 +1,5 @@
+
+# 1) import everything
 from __future__ import absolute_import, division, print_function
 
 import base64
@@ -12,7 +14,6 @@ import shutil
 from pathlib import Path
 
 import tensorflow as tf
-
 from tf_agents.agents.dqn import dqn_agent
 from tf_agents.drivers import dynamic_step_driver
 from tf_agents.environments import suite_gym
@@ -28,6 +29,7 @@ from tf_agents.utils import common
 
 import custom_openai_frameworks
 
+# 2) define our variables
 num_iterations: int = 20000 # how long to train for. I recoment this be greater than eval_interval * 3
 initial_collect_steps: int = 1000 
 collect_steps_per_iteration: int = 1
@@ -39,7 +41,7 @@ num_eval_episodes: int = 10
 eval_interval: int = 1000
 #env_name: str = 'StandInRain-v0'
 #env_name: str = 'SimpleCrawler-v1'
-env_name: str = 'GolfCardGameEnv-v0'
+env_name: str = 'GolfCardGame-v0'
 model_number: str = str(time.time()) # if you want to load a specific model, edit this
 #model_number: str = '1588725542.976953'
 save_gif_every_x_iterations: int = 100000
