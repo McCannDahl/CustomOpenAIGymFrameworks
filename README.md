@@ -10,3 +10,5 @@ The following frameworks are available:
 ## Getting Started  
 1) install custom Gym   
 `pip install -e custom-openai-frameworks`  
+  
+see: https://www.tensorflow.org/agents/tutorials/1_dqn_tutorial  

@@ -12,20 +12,28 @@ class NoDisplayEnv(CustomEnv):
 
     def __init__(self) -> None: # ovveride
         """Define variables"""
-        CustomEnv.__init__(self)
+        super().__init__()
 
     def set_state(self, action) -> None: # override & Super
         """Sets state"""
-        CustomEnv.set_state(self, action)
+        return super().set_state(action)
 
     def get_done(self) -> bool: # override
         """Gets done"""
-        CustomEnv.get_done(self)
+        return super().get_done()
 
     def get_reward_notdone(self) -> float: # override
         """Gets done"""
-        CustomEnv.get_reward_notdone(self)
+        return super().get_reward_notdone()
 
     def get_reward_done(self) -> float: # override
         """Gets done"""
-        CustomEnv.get_reward_done(self)
+        return super().get_reward_done()
+
+    def setup(self, num_actions, observations): # override
+        return super().setup(num_actions, observations)
+
+    def reset(self):
+        """reset"""
+        self.setup(None, None)
+        return super().reset()

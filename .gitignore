@@ -1,3 +1,4 @@
 *.pyc
 .DS_Store
 custom-openai-frameworks/custom_openai_frameworks.egg-info/*
+output/*

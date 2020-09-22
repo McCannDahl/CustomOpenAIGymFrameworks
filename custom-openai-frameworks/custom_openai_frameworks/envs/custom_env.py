@@ -50,17 +50,23 @@ class CustomEnv(gym.Env):
     def get_reward(self, done):
         """Gets the reward"""
         reward = 0.0
+        #print('self.steps_beyond_done',self.steps_beyond_done)
+        #print('done',done)
         if not done:
             reward = self.get_reward_notdone()
+            #print('got not done reward',reward)
         elif self.steps_beyond_done is None:
             self.steps_beyond_done = 0
-            reward = self.get_reward_done()
+            reward = self.get_reward_notdone()
+            #print('got done reward')
         else:
+            reward = self.get_reward_done()
             if self.steps_beyond_done == 0:
                 logger.warn("You are calling 'step()' even though this environment has \
                     already returned done = True. You should always call 'reset()' once \
                     you receive 'done = True' -- any further steps are undefined behavior.")
             self.steps_beyond_done += 1
+        #print('self.steps_beyond_done',self.steps_beyond_done)
         return reward
 
     def setup(self, num_actions, observations): # override
@@ -68,9 +74,7 @@ class CustomEnv(gym.Env):
         obs_np = np.array(observations, dtype=np.float32)
         self.observation_space: spaces.Box = spaces.Box(-obs_np, obs_np, dtype=np.float32)
         self.action_space: spaces.Discrete = spaces.Discrete(num_actions)
-
         self.seed()
-
 
     def seed(self, seed=None):
         """seed"""
@@ -82,6 +86,10 @@ class CustomEnv(gym.Env):
         self.set_state(action)
         done = self.get_done()
         reward = self.get_reward(done)
+        #if reward == 1:
+        #    print('reward',reward)
+        #print('self.state',self.state)
+        #print('done',done)
         return np.array(self.state), reward, done, {}
 
     def reset_state(self): 
